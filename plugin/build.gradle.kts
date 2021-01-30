@@ -1,6 +1,6 @@
 plugins {
   `java-gradle-plugin`
-  `ivy-publish`
+  `maven-publish`
   kotlin("jvm") version "1.4.21"
 }
 
@@ -73,8 +73,8 @@ tasks.check {
 
 publishing {
   repositories {
-    ivy {
-      url = uri("s3://ivy.painkillergis.com")
+    maven {
+      url = uri("s3://mvn.painkillergis.com")
       credentials(AwsCredentials::class) {
         accessKey = ProcessBuilder("sh", "-c", "grep _id ~/.aws/credentials | sed 's/.*= //'")
           .start()
