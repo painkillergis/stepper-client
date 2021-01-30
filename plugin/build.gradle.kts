@@ -72,11 +72,6 @@ tasks.check {
 }
 
 publishing {
-  publications {
-    val stepperClient by creating(IvyPublication::class) {
-      from(components["java"])
-    }
-  }
   repositories {
     ivy {
       url = uri("s3://ivy.painkillergis.com")
