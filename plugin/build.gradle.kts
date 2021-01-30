@@ -9,11 +9,11 @@ repositories {
 }
 
 dependencies {
-  implementation("com.fkorotkov:kubernetes-dsl:+")
-  implementation("io.fabric8:kubernetes-client:+")
-  implementation("io.ktor:ktor-client-apache:+")
-  implementation("io.ktor:ktor-client-core:+")
-  implementation("io.ktor:ktor-client-jackson:+")
+  implementation("com.fkorotkov:kubernetes-dsl:2.8.1")
+  implementation("io.fabric8:kubernetes-client:5.0.1")
+  implementation("io.ktor:ktor-client-apache:1.4.1")
+  implementation("io.ktor:ktor-client-core:1.4.1")
+  implementation("io.ktor:ktor-client-jackson:1.4.1")
   implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
   testImplementation("org.jetbrains.kotlin:kotlin-test")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
