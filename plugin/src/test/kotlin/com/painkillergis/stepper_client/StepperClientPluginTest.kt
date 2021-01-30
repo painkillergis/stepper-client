@@ -8,7 +8,7 @@ class StepperClientPluginTest {
   @Test
   fun `plugin registers task`() {
     val project = ProjectBuilder.builder().build()
-    project.plugins.apply("com.painkillergis.stepper_client.greeting")
+    project.plugins.apply("com.painkillergis.stepper_client.stepperClient")
 
     assertNotNull(project.tasks.findByName("greeting"))
   }

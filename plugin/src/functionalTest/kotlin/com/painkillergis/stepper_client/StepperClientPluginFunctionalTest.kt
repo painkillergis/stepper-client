@@ -14,7 +14,7 @@ class StepperClientPluginFunctionalTest {
     projectDir.resolve("build.gradle").writeText(
       """
           plugins {
-            id('com.painkillergis.stepper_client.greeting')
+            id('com.painkillergis.stepper_client.stepperClient')
           }
         """
     )
@@ -24,8 +24,8 @@ class StepperClientPluginFunctionalTest {
     runner.withPluginClasspath()
     runner.withArguments("greeting")
     runner.withProjectDir(projectDir)
-    val result = runner.build();
+    val result = runner.build()
 
-    assertTrue(result.output.contains("Hello from plugin 'com.painkillergis.stepper_client.greeting'"))
+    assertTrue(result.output.contains("Hello from plugin 'com.painkillergis.stepper_client.stepperClient'"))
   }
 }
