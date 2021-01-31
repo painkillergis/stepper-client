@@ -25,7 +25,7 @@ class StepperClientPlugin : Plugin<Project> {
           val groupPath = project.group as String
           deploy(
             "${project.rootProject.name}-dark",
-            groupPath.substring(groupPath.lastIndexOf("."), groupPath.length),
+            groupPath.substring(groupPath.lastIndexOf(".") + 1, groupPath.length),
             project.rootProject.name,
             getVersion(),
           )
