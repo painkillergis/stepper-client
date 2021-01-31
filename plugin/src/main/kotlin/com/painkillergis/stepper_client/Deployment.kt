@@ -3,7 +3,6 @@ package com.painkiller.stepper_client
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 suspend fun deploy(serviceName: String, imageName: String, version: String) {
   newStepperClient().post<Unit>("/services/$serviceName/deployment") {
@@ -14,7 +13,7 @@ suspend fun deploy(serviceName: String, imageName: String, version: String) {
     )
   }
 
-  val stepperDarkClient = newStepperDarkClient()
+  val stepperDarkClient = newClient("painkiller.arctair.com", serviceName)
   var lastFetchedDeployedVersion = ""
   do {
     val deployedVersion = try {

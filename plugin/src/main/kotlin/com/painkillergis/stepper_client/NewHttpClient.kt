@@ -14,11 +14,11 @@ fun newStepperClient() = HttpClient {
   }
 }
 
-fun newStepperDarkClient() = HttpClient {
+fun newClient(host : String, basePath : String) = HttpClient {
   install(JsonFeature)
   defaultRequest {
     url.protocol = URLProtocol.HTTP
-    url.host = "painkiller.arctair.com"
-    url.encodedPath = "/stepper-dark/${url.encodedPath.trimStart('/')}"
+    url.host = host
+    url.encodedPath = "/$basePath/${url.encodedPath.trimStart('/')}"
   }
 }
