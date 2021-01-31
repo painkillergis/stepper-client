@@ -4,10 +4,11 @@ import io.ktor.client.features.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
 
-suspend fun deploy(serviceName: String, imageName: String, version: String) {
+suspend fun deploy(serviceName: String, group : String, imageName: String, version: String) {
   newStepperClient().post<Unit>("/services/$serviceName/deployment") {
     header("content-type", "application/json")
     body = mapOf(
+      "group" to group,
       "imageName" to imageName,
       "version" to version,
     )

@@ -22,7 +22,13 @@ class StepperClientPlugin : Plugin<Project> {
     project.tasks.register("darkDeploy") { task ->
       task.doLast {
         runBlocking {
-          deploy("${project.rootProject.name}-dark", project.rootProject.name, getVersion())
+          val groupPath = project.rootProject.group as String
+          deploy(
+            "${project.rootProject.name}-dark",
+            groupPath.substring(groupPath.lastIndexOf("."), groupPath.length),
+            project.rootProject.name,
+            getVersion(),
+          )
         }
       }
     }
