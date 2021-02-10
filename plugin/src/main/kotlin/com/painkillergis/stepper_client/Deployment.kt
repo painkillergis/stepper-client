@@ -4,7 +4,7 @@ import io.ktor.client.features.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
 
-suspend fun deploy(serviceName: String, group: String, imageName: String, version: String) {
+suspend fun deploy(stepperHost: String, serviceName: String, group: String, imageName: String, version: String) {
   val deployment = mapOf(
     "group" to group,
     "imageName" to imageName,
@@ -14,16 +14,16 @@ suspend fun deploy(serviceName: String, group: String, imageName: String, versio
   println("sending deployment request:")
   println(deployment)
 
-  newStepperClient().post<Unit>("/services/$serviceName/deployment") {
+  newStepperClient(stepperHost).post<Unit>("/services/$serviceName/deployment") {
     header("content-type", "application/json")
     body = deployment
   }
 
-  val stepperDarkClient = newClient("painkiller.arctair.com", serviceName)
+  val darkClient = newClient(stepperHost, serviceName)
   var lastFetchedDeployedVersion = ""
   do {
     val deployedVersion = try {
-      stepperDarkClient.get<Map<String, String>>("/version")["version"]
+      darkClient.get<Map<String, String>>("/version")["version"]
     } catch (ignored: ServerResponseException) {
       null
     } ?: "unknown"

@@ -5,11 +5,11 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.http.*
 
-fun newStepperClient() = HttpClient {
+fun newStepperClient(host : String) = HttpClient {
   install(JsonFeature)
   defaultRequest {
     url.protocol = URLProtocol.HTTP
-    url.host = "painkiller.arctair.com"
+    url.host = host
     url.encodedPath = "/stepper/${url.encodedPath.trimStart('/')}"
   }
 }
