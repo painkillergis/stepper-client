@@ -1,10 +1,18 @@
 package com.painkillergis.stepper_client
 
+import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
 
-suspend fun deploy(stepperHost: String, serviceName: String, group: String, imageName: String, version: String) {
+suspend fun deploy(
+  stepperClient: HttpClient,
+  darkClient: HttpClient,
+  serviceName: String,
+  group: String,
+  imageName: String,
+  version: String
+) {
   val deployment = mapOf(
     "group" to group,
     "imageName" to imageName,
@@ -14,12 +22,11 @@ suspend fun deploy(stepperHost: String, serviceName: String, group: String, imag
   println("sending deployment request:")
   println(deployment)
 
-  newStepperClient(stepperHost).post<Unit>("/services/$serviceName/deployment") {
+  stepperClient.post<Unit>("/services/$serviceName/deployment") {
     header("content-type", "application/json")
     body = deployment
   }
 
-  val darkClient = newClient(stepperHost, serviceName)
   var lastFetchedDeployedVersion = ""
   do {
     val deployedVersion = try {

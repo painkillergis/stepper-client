@@ -5,8 +5,6 @@ import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.http.*
 
-fun newStepperClient(host: String) = newClient(host, "/stepper")
-
 fun newClient(host: String, basePath: String) = HttpClient {
   install(JsonFeature)
   defaultRequest {

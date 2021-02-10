@@ -20,9 +20,15 @@ class StepperClientPlugin : Plugin<Project> {
       task.doLast {
         runBlocking {
           val groupPath = project.group as String
+          val serviceName = "${project.rootProject.name}-dark"
+          val stepperHost = System.getProperty("stepperHost") ?: "painkiller.arctair.com"
+          val stepperBasePath = System.getProperty("stepperBasePath") ?: "stepper"
+          val targetHost = System.getProperty("targetHost") ?: "painkiller.arctair.com"
+          val targetBasePath = System.getProperty("targetBasePath") ?: serviceName
           deploy(
-            System.getProperty("stepperHost") ?: "painkiller.arctair.com",
-            "${project.rootProject.name}-dark",
+            newClient(stepperHost, stepperBasePath),
+            newClient(targetHost, targetBasePath),
+            serviceName,
             groupPath.substring(groupPath.lastIndexOf(".") + 1, groupPath.length),
             project.rootProject.name,
             getVersion(),
@@ -34,7 +40,10 @@ class StepperClientPlugin : Plugin<Project> {
       task.doLast {
         runBlocking {
           switchDeployments(
-            System.getProperty("stepperHost") ?: "painkiller.arctair.com",
+            newClient(
+              System.getProperty("stepperHost") ?: "painkiller.arctair.com",
+              System.getProperty("stepperBasePath") ?: "stepper",
+            ),
             project.rootProject.name,
             "${project.rootProject.name}-dark",
           )

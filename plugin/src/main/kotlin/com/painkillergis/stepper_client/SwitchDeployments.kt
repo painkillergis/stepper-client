@@ -1,6 +1,11 @@
 package com.painkillergis.stepper_client
 
+import io.ktor.client.*
 import io.ktor.client.request.*
 
-suspend fun switchDeployments(stepperHost: String, firstServiceName: String, lastServiceName: String) =
-  newStepperClient(stepperHost).post<Unit>("/services/$firstServiceName/switchDeploymentsWith/$lastServiceName")
+suspend fun switchDeployments(
+  httpClient: HttpClient,
+  firstServiceName: String,
+  lastServiceName: String
+) =
+  httpClient.post<Unit>("/services/$firstServiceName/switchDeploymentsWith/$lastServiceName")
