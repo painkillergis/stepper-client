@@ -21,7 +21,7 @@ class StepperClientPlugin : Plugin<Project> {
         runBlocking {
           val groupPath = project.group as String
           deploy(
-            "painkiller.arctair.com",
+            System.getProperty("stepperHost") ?: "painkiller.arctair.com",
             "${project.rootProject.name}-dark",
             groupPath.substring(groupPath.lastIndexOf(".") + 1, groupPath.length),
             project.rootProject.name,
@@ -34,7 +34,7 @@ class StepperClientPlugin : Plugin<Project> {
       task.doLast {
         runBlocking {
           switchDeployments(
-            "painkiller.arctair.com",
+            System.getProperty("stepperHost") ?: "painkiller.arctair.com",
             project.rootProject.name,
             "${project.rootProject.name}-dark",
           )
