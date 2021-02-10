@@ -1,4 +1,4 @@
-package com.painkiller.stepper_client
+package com.painkillergis.stepper_client
 
 import com.fkorotkov.kubernetes.rbac.*
 import io.fabric8.kubernetes.client.DefaultKubernetesClient

@@ -1,4 +1,4 @@
-package com.painkiller.stepper_client
+package com.painkillergis.stepper_client
 
 import io.ktor.client.features.*
 import io.ktor.client.request.*

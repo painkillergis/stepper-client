@@ -1,8 +1,5 @@
 package com.painkillergis.stepper_client
 
-import com.painkiller.stepper_client.bootstrap
-import com.painkiller.stepper_client.deploy
-import com.painkiller.stepper_client.switchDeployments
 import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.Plugin
