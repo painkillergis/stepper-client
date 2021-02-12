@@ -21,13 +21,18 @@ class StepperClientPlugin : Plugin<Project> {
         runBlocking {
           val groupPath = project.group as String
           val serviceName = "${project.rootProject.name}-dark"
+
           val stepperHost = System.getProperty("stepperHost") ?: "painkiller.arctair.com"
           val stepperBasePath = System.getProperty("stepperBasePath") ?: "stepper"
+          val stepperBaseUri = System.getProperty("stepperBaseUri") ?: "http://$stepperHost/$stepperBasePath"
+
           val targetHost = System.getProperty("targetHost") ?: "painkiller.arctair.com"
           val targetBasePath = System.getProperty("targetBasePath") ?: serviceName
+          val targetBaseUri = System.getProperty("targetBaseUri") ?: "http://$targetHost/$targetBasePath"
+
           deploy(
-            newClient(stepperHost, stepperBasePath),
-            newClient(targetHost, targetBasePath),
+            newClient(stepperBaseUri),
+            newClient(targetBaseUri),
             serviceName,
             groupPath.substring(groupPath.lastIndexOf(".") + 1, groupPath.length),
             project.rootProject.name,
@@ -39,11 +44,12 @@ class StepperClientPlugin : Plugin<Project> {
     project.tasks.register("switchDeployments") { task ->
       task.doLast {
         runBlocking {
+          val stepperHost = System.getProperty("stepperHost") ?: "painkiller.arctair.com"
+          val stepperBasePath = System.getProperty("stepperBasePath") ?: "stepper"
+          val stepperBaseUri = System.getProperty("stepperBaseUri") ?: "http://$stepperHost/$stepperBasePath"
+
           switchDeployments(
-            newClient(
-              System.getProperty("stepperHost") ?: "painkiller.arctair.com",
-              System.getProperty("stepperBasePath") ?: "stepper",
-            ),
+            newClient(stepperBaseUri),
             project.rootProject.name,
             "${project.rootProject.name}-dark",
           )
